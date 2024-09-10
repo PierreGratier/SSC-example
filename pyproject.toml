@@ -3,7 +3,7 @@
 # introduce pyproject.toml
 [build-system]
 requires = [
-    "setuptools >=61",
+    "setuptools>=64", "setuptools-scm>=8",
 ]
 build-backend = "setuptools.build_meta"
 
@@ -15,7 +15,7 @@ name = "SSC_example"
 description = "Add short description here"
 readme = "README.md"
 maintainers = [
-    { name = "Pierre Gratier", email = "your@email.com" },
+    { name = "Pierre Gratier", email = "pierre.gratier@u-bordeaux.fr" },
 ]
 version = "0.0.1"
 requires-python = ">=3.8"
@@ -26,6 +26,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 dependencies = [
+	"ruff"
 ]
 
 [project.optional-dependencies]
@@ -33,6 +34,7 @@ tests = [
     "pytest",
     "pytest-cov",
     "nbval",
+	"ruff"
 ]
 docs = [
     "ipykernel",
@@ -52,9 +54,14 @@ packages = [
     "SSC_example",
 ]
 
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "no-local-version"
+
 # The following is the configuration for the pytest test suite
 [tool.pytest.ini_options]
 testpaths = [
     "tests",
     "notebooks",
 ]
+addopts = "-v -x --nbval --current-env"  # -v: verbose, -x: stop on failure --nbval: include notebooks --current-env: use the current environment
